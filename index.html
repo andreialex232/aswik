@@ -4,22 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Allaord - Home</title>
-  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/shared.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Header & nav -->
   <header class="header">
     <h1 class="h1">
-      <a href="home.html">Allaord</a>
+      <a href="index.html">Allaord</a>
     </h1>
     <nav class="nav">
       <a href="how.html">How it works</a>
       <a href="why.html">Why</a>
     </nav>
   </header>
+
+  <!-- The word generator -->
+  <section class="game">
+    <div class="game__container-1">
+      <div class="game__article-1">
+        Indefinite Article
+      </div>
+      <div class="game__word-1">
+        Word
+      </div>
+      <div class="game__translation-1">
+        English Translation
+      </div>
+    </div>
+    <div class="game__container-2">
+      <div class="game__article-2">
+        Indefinite Article
+      </div>
+      <div class="game__word-2">
+        Word
+      </div>
+      <div class="game__translation-2">
+        English Translation
+      </div>
+    </div>
+  </section>
 
   <button onclick="logData()">console.log data</button>
   <button onclick="getRandomWordEn()">get random word</button>

@@ -1,0 +1,16 @@
+@keyframes movingGradient {
+  0% {
+    background-position: bottom left;
+    background-size: 100%;
+  }
+
+  50% {
+    background-position: top right;
+    background-size: 500%;
+  }
+
+  100% {
+    background-position: bottom left;
+    background-size: 100%;
+  }
+}
