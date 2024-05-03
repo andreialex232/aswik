@@ -23,6 +23,7 @@ nav a:hover {
 }
 
 body {
+  box-sizing: border-box;
   color: #fff;
   font-size: 1.50rem;
   font-family: "Roboto", sans-serif;

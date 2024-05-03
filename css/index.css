@@ -1,67 +1,71 @@
-/* Slider checkbox */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
+/* Checkbox */
+.checkbox-wrapper label {
+  display: block;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+.checkbox-wrapper input {
+  visibility: hidden;
+  display: none;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
+.checkbox-wrapper input:checked ~ .checkbox {
+  transform: rotate(45deg);
+  width: 14px;
+  margin-left: 12px;
+  border-color: #fff;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.checkbox-wrapper .checkbox {
+  display: block;
+  width: inherit;
+  height: inherit;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  transition: all .2s;
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+/* Settings */
+.settings {
+  margin-top: 3rem;
+  text-align: center;
 }
 
-.slider.round {
-  border-radius: 34px;
+.settings__heading {
+  border-bottom: .1px solid #fff;
+  display: inline;
+  padding-bottom: .3rem;
 }
 
-.slider.round:before {
-  border-radius: 50%;
+.settings__options,
+.settings__article,
+.settings__translation-en,
+.settings__translation-ro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings__options {
+  margin-top: 2rem;
+  gap: 5rem;
+}
+
+.settings__article,
+.settings__translation-en,
+.settings__translation-ro {
+  gap: 1rem;
 }
 
 /* Generator section */
 .game {
   display: flex;
-  margin-top: 10rem;
+  margin-top: 6rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -69,11 +73,11 @@ input:checked + .slider:before {
 
 .game__container-1,
 .game__container-2 {
-  display: flex;
-  gap: 20rem;
+  display: grid;
   padding: 1rem;
-  justify-content: center;
+  grid-template-columns: repeat(3, 400px);
   align-items: center;
+  justify-items: center;
   font-family: "Poppins", sans-serif;
   font-weight: 200;
   font-style: normal;
@@ -83,6 +87,7 @@ input:checked + .slider:before {
 
 .game__container-1 {
   border-top: .1px solid #fff;
+ 
 }
 
 .game__container-2 {
@@ -93,4 +98,9 @@ input:checked + .slider:before {
 .game__word-1,
 .game__translation-1 {
   text-align: center;
+  border-bottom: .1px solid #fff;
+}
+
+.list {
+  list-style: none;
 }
