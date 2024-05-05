@@ -30,15 +30,6 @@ function switchElementVisibility(elementToShow, elementToHide) {
   elementToHide.classList.add('u-display-none');
 }
 
-// Function which combines the above function with an if statement to handle 2 cases
-function showOrHideArticle() {
-  if(articlePlaceholder.classList.contains('u-display-none')) {
-    switchElementVisibility(articlePlaceholder, articleOverlay);
-  } else {
-    switchElementVisibility(articleOverlay, articlePlaceholder);
-  }
-}
-
 // Function used in creating and appending translations
 function createElementAndAppend(word) {
   const li = document.createElement('li');
