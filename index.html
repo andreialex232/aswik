@@ -6,6 +6,7 @@
   <title>Allaord - Home</title>
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/utils.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&display=swap" rel="stylesheet">
@@ -17,8 +18,8 @@
       <a href="index.html">Allaord</a>
     </h1>
     <nav class="nav">
+      <a href="why.html">Why did i create this</a>
       <a href="how.html">How it works</a>
-      <a href="why.html">Why</a>
     </nav>
   </header>
 
@@ -32,7 +33,9 @@
         </span>
         <div class="checkbox-wrapper">
           <label>
-            <input type="checkbox"/>
+            <input
+              id="checkbox-article"
+              type="checkbox"/>
             <span class="checkbox"></span>
           </label>
         </div>
@@ -43,7 +46,9 @@
         </span>
         <div class="checkbox-wrapper">
           <label>
-            <input type="checkbox"/>
+            <input 
+              id="checkbox-en"
+              type="checkbox"/>
             <span class="checkbox"></span>
           </label>
         </div>
@@ -54,7 +59,9 @@
         </span>
         <div class="checkbox-wrapper">
           <label>
-            <input type="checkbox"/>
+            <input 
+              id="checkbox-ro"
+              type="checkbox"/>
             <span class="checkbox"></span>
           </label>
         </div>
@@ -62,8 +69,14 @@
     </div>
   </section>
 
+<!-- Word generator -->
+  <div class="button-wrapper">
+    <button 
+      onclick="getEnWord()"
+      class="button generate-button">Get random word</button>
+  </div>
 
-  <!-- The word generator -->
+  <!-- Game box -->
   <section class="game">
     <div class="game__container-1">
       <div class="game__article-1">
@@ -78,22 +91,45 @@
     </div>
     <div class="game__container-2">
       <div class="game__article-2">
-        --
+        <div class="game__article-2__placeholder">
+          &#8212;
+        </div>
+        <div class="hidden-article u-display-none">
+          <div class="informative-text">
+            Hidden
+          </div>
+          <button 
+            onclick="switchElementVisibility(articlePlaceholder, articleOverlay)"
+            class="button">
+            Click to Show
+          </button>
+        </div>
       </div>
       <div class="game__word-2">
         tycker om
       </div>
       <div class="game__translation-2">
         <ul class="list">
-          <li>Like</li>
-          <li>Likes</li>
+          <li class="list__item">
+            &#8212;
+          </li>
         </ul>
+        <div class="hidden-translation-2 u-display-none">
+          <div class="informative-text">
+            Hidden
+          </div>
+          <button 
+            onclick="switchElementVisibility(translationList, enTranslationOverlay)"
+            class="button">
+            Click to Show
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
   <button onclick="logData()">console.log data</button>
-  <button onclick="getRandomWordEn()">get random word</button>
+
 <div style="display: flex; flex-direction: column;">
   <div style="display: flex; gap: 2rem;">
     <div>I. Art</div>

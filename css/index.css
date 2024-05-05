@@ -62,10 +62,10 @@
   gap: 1rem;
 }
 
-/* Generator section */
+/* Game section */
 .game {
   display: flex;
-  margin-top: 6rem;
+  margin-top: 1.25rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -74,7 +74,6 @@
 .game__container-1,
 .game__container-2 {
   display: grid;
-  padding: 1rem;
   grid-template-columns: repeat(3, 400px);
   align-items: center;
   justify-items: center;
@@ -87,11 +86,13 @@
 
 .game__container-1 {
   border-top: .1px solid #fff;
- 
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .game__container-2 {
   border-bottom: .1px solid #fff;
+  padding-bottom: 1rem;
 }
 
 .game__article-1,
@@ -101,6 +102,46 @@
   border-bottom: .1px solid #fff;
 }
 
+/* The used for translations */
 .list {
   list-style: none;
+  text-align: center;
+}
+
+/* Buttons */
+.button-wrapper {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.button {
+  transition: all .15s;
+  border: none;
+  cursor: pointer;
+  font-size: 1.35rem;
+  outline: none;
+  border-radius: 2rem;
+  padding: .75rem;
+  color: black;
+  background-image: linear-gradient(to right, #649deb, #b3b8cc, #dcccbf);
+  animation: movingGradient 8s linear infinite;
+}
+
+.generate-button:hover {
+  transform: translateY(-1px);
+}
+
+.generate-button:active {
+  transform: translateY(1px)
+}
+
+/* Classes used to display HTML in index.js */
+.hidden-article,
+.hidden-translation-2 {
+  text-align: center;
+  margin-bottom: .3rem;
+}
+
+.informative-text {
+  margin-bottom: .2rem;
 }
