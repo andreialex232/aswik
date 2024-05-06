@@ -82,13 +82,11 @@ const replaceInnerText = {
       if(Array.isArray(wordObj.en_translation)) {
         wordObj.en_translation.forEach((translation) => {
           this.createElementAndAppend(translation);
-          console.log('bifat, este array');
           return;
         });
       // If data coming is not an array
       } else {
         this.createElementAndAppend(wordObj.en_translation);
-        console.log('bifat, nu este array');
         return;
       };
     };
@@ -101,25 +99,19 @@ const replaceInnerText = {
       if(Array.isArray(wordObj.en_translation)) {
         wordObj.en_translation.forEach((translation) => {
           this.createElementAndAppend(translation);
-          console.log('nebifat, este array');
           return;
         });
       // If data coming is not an array
       } else {
         this.createElementAndAppend(wordObj.en_translation);
-        console.log('nebifat, nu este array');
         return;
       }
     }
+  },
+  word: (wordObj) => {
+    gameWord.innerText = wordObj.word
   }
 }
-
-
-
-
-
-
-
 
 // Get random word
 async function getEnWord() {
@@ -135,6 +127,7 @@ async function getEnWord() {
       const randomWordObj = res[random];
       replaceInnerText.article(randomWordObj);
       replaceInnerText.enTranslation(randomWordObj);
+      replaceInnerText.word(randomWordObj);
     })
 }
 
