@@ -12,197 +12,213 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="bg-1">
+    <!-- Header & nav -->
+    <header class="header">
+      <h1 class="h1">
+        <a href="index.html">ASWIK</a>
+      </h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="history.html">History</a>
+      </nav>
+    </header>
 
-  <!-- Header & nav -->
-  <header class="header">
-    <h1 class="h1">
-      <a href="index.html">ASWIK</a>
-    </h1>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="history.html">History</a>
-    </nav>
-  </header>
+    <!-- Settings -->
+    <section class="settings">
+      <h2 class="settings__heading">Settings</h2>
+      <div class="settings__options">
+        <div class="settings__article">
+          <span class="settings__name">
+            Show Article
+          </span>
+          <div class="checkbox-wrapper">
+            <label>
+              <input
+                id="checkbox-article"
+                type="checkbox"/>
+              <span class="checkbox"></span>
+            </label>
+          </div>
+        </div>
+        <div class="settings__translation-en">
+          <span class="settings__name">
+            Show English Translation
+          </span>
+          <div class="checkbox-wrapper">
+            <label>
+              <input 
+                id="checkbox-en"
+                type="checkbox"/>
+              <span class="checkbox"></span>
+            </label>
+          </div>
+        </div>
+        <div class="settings__translation-ro">
+          <span class="settings__name">
+            Show Romanian Translation
+          </span>
+          <div class="checkbox-wrapper">
+            <label>
+              <input 
+                id="checkbox-ro"
+                type="checkbox"/>
+              <span class="checkbox"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Settings -->
-  <section class="settings">
-    <h2 class="settings__heading">Settings</h2>
-    <div class="settings__options">
-      <div class="settings__article">
-        <span class="settings__name">
-          Show Article
-        </span>
-        <div class="checkbox-wrapper">
-          <label>
-            <input
-              id="checkbox-article"
-              type="checkbox"/>
-            <span class="checkbox"></span>
-          </label>
-        </div>
-      </div>
-      <div class="settings__translation-en">
-        <span class="settings__name">
-          Show English Translation
-        </span>
-        <div class="checkbox-wrapper">
-          <label>
-            <input 
-              id="checkbox-en"
-              type="checkbox"/>
-            <span class="checkbox"></span>
-          </label>
-        </div>
-      </div>
-      <div class="settings__translation-ro">
-        <span class="settings__name">
-          Show Romanian Translation
-        </span>
-        <div class="checkbox-wrapper">
-          <label>
-            <input 
-              id="checkbox-ro"
-              type="checkbox"/>
-            <span class="checkbox"></span>
-          </label>
-        </div>
-      </div>
+  <!-- Word generator - eng-->
+    <div class="button-wrapper">
+      <button
+        onclick="getWord('en')"
+        class="button generate-button">Get random word
+      </button>
     </div>
-  </section>
 
-<!-- Word generator - eng-->
-  <div class="button-wrapper">
-    <button
-      onclick="getWord('en')"
-      class="button generate-button">Get random word
-    </button>
-  </div>
-
-  <!-- Game box - eng -->
-  <section class="game">
-    <div class="game__container-1">
-      <div class="game__article-1">
-        Indefinite Article
+    <!-- Game box - eng -->
+    <section class="game">
+      <div class="game__container-1">
+        <div class="game__article-1">
+          Indefinite Article
+        </div>
+        <div class="game__word-1">
+          Word
+        </div>
+        <div class="game__translation-1">
+          English Translation
+        </div>
       </div>
-      <div class="game__word-1">
-        Word
-      </div>
-      <div class="game__translation-1">
-        English Translation
-      </div>
-    </div>
-    <div class="game__container-2">
-      <div class="game__article-2">
-        <div class="game__article-2__placeholder">
+      <div class="game__container-2">
+        <div class="game__article-2">
+          <div class="game__article-2__placeholder">
+            &#8212;
+          </div>
+          <div class="hidden-article-2 u-display-none">
+            <div class="informative-text">
+              Hidden
+            </div>
+            <button 
+              onclick="visibility.enShowArticle()"
+              class="button">
+              Click to Show
+            </button>
+          </div>
+        </div>
+        <div class="game__word-2">
           &#8212;
         </div>
-        <div class="hidden-article-2 u-display-none">
-          <div class="informative-text">
-            Hidden
+        <div class="game__translation-2">
+          <ul class="list-2">
+            <li class="list-2__item">
+              &#8212;
+            </li>
+          </ul>
+          <div class="hidden-translation-2 u-display-none">
+            <div class="informative-text">
+              Hidden
+            </div>
+            <button 
+              onclick="visibility.enShowTranslation()"
+              class="button">
+              Click to Show
+            </button>
           </div>
-          <button 
-            onclick="visibility.enShowArticle()"
-            class="button">
-            Click to Show
-          </button>
         </div>
       </div>
-      <div class="game__word-2">
-        &#8212;
+    </section>
+
+    <!-- Word generator - ro -->
+    <div class="button-wrapper">
+      <button 
+        onclick="getWord('ro')"
+        class="button generate-button">Get random word</button>
+    </div>
+
+    <!-- Game box - ro -->
+    <section class="game">
+      <div class="game__container-1">
+        <div class="game__article-1">
+          Indefinite Article
+        </div>
+        <div class="game__word-1">
+          Word
+        </div>
+        <div class="game__translation-1">
+          Romanian Translation
+        </div>
       </div>
-      <div class="game__translation-2">
-        <ul class="list-2">
-          <li class="list-2__item">
+      <div class="game__container-3">
+        <div class="game__article-3">
+          <div class="game__article-3__placeholder">
             &#8212;
-          </li>
-        </ul>
-        <div class="hidden-translation-2 u-display-none">
-          <div class="informative-text">
-            Hidden
           </div>
-          <button 
-            onclick="visibility.enShowTranslation()"
-            class="button">
-            Click to Show
-          </button>
+          <div class="hidden-article-3 u-display-none">
+            <div class="informative-text">
+              Hidden
+            </div>
+            <button 
+              onclick="visibility.roShowArticle()"
+              class="button">
+              Click to Show
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Word generator - ro -->
-  <div class="button-wrapper">
-    <button 
-      onclick="getWord('ro')"
-      class="button generate-button">Get random word</button>
-  </div>
-
-  <!-- Game box - ro -->
-  <section class="game">
-    <div class="game__container-1">
-      <div class="game__article-1">
-        Indefinite Article
-      </div>
-      <div class="game__word-1">
-        Word
-      </div>
-      <div class="game__translation-1">
-        Romanian Translation
-      </div>
-    </div>
-    <div class="game__container-3">
-      <div class="game__article-3">
-        <div class="game__article-3__placeholder">
+        <div class="game__word-3">
           &#8212;
         </div>
-        <div class="hidden-article-3 u-display-none">
-          <div class="informative-text">
-            Hidden
+        <div class="game__translation-3">
+          <ul class="list-3">
+            <li class="list-3__item">
+              &#8212;
+            </li>
+          </ul>
+          <div class="hidden-translation-3 u-display-none">
+            <div class="informative-text">
+              Hidden
+            </div>
+            <button 
+              onclick="visibility.roShowTranslation()"
+              class="button">
+              Click to Show
+            </button>
           </div>
-          <button 
-            onclick="visibility.roShowArticle()"
-            class="button">
-            Click to Show
-          </button>
         </div>
       </div>
-      <div class="game__word-3">
-        &#8212;
-      </div>
-      <div class="game__translation-3">
-        <ul class="list-3">
-          <li class="list-3__item">
-            &#8212;
-          </li>
-        </ul>
-        <div class="hidden-translation-3 u-display-none">
-          <div class="informative-text">
-            Hidden
-          </div>
-          <button 
-            onclick="visibility.roShowTranslation()"
-            class="button">
-            Click to Show
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    </section>
+  </div>
   <!-- History -->
-  <!-- <section class="history">
-    <h2 class="history__h2">Session history</h2>
-    <div class="history__headers">
-      <div>Article</div>
-      <div>Word</div>
-      <div>Translation</div>
-    </div>
-    <ul class="history__list">
-      <li class="history__list__item">
-        
-      </li>
-    </ul>
-  </section> -->
+  <div class="bg-2">
+    <section class="history">
+      <h2 class="history__h2">Session history</h2>
+      <div class="history__date">
+        &#8212;
+      </div>
+      <div class="history__headers">
+        <div>Article</div>
+        <div>Word</div>
+        <div>Translation</div>
+      </div>
+      <div class="history__content">
+        <ul class="history__content__list">
+          <li class="history__content__list__items">
+            <div>
+              &#8212;
+            </div>
+            <div>
+              &#8212;
+            </div>
+            <div>
+              &#8212;
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>  
+  
   <!-- <button onclick="logData()">console.log data</button> -->
 
 <!-- Inputs used to post data to database -->
