@@ -1,5 +1,9 @@
 // Api
 const api = "http://127.0.0.1:3000/all";
+let apiData;
+
+// Time variable
+const date = new Date();
 
 // Settings variables
 const showArticle = document.getElementById('checkbox-article');
@@ -24,9 +28,33 @@ const gameWordRo = document.querySelector('.game__word-3');
 // Word for en box
 const gameWordEn = document.querySelector('.game__word-2');
 
-// Function to check settings and returns a boolean
-function checkSetting(setting) {
-  return setting.checked ? true : false;
+// Functions which check for something grouped into an object
+const check = {
+  setting: (setting) => {
+    return setting.checked? true: false;
+  },
+  enChecked: () => {
+    showRoTranslation.checked = false;
+  },
+  roChecked: () => {
+    showEnTranslation.checked = false;
+  },
+  ifArrayAndAppend: (item) => {
+    if(Array.isArray(item)) {
+      item.forEach((translation) => {
+        createAndAppendLi(translation);
+      })
+    } else {
+      createAndAppendLi(item);
+    };
+  },
+  ifArticleExistsReplace: (item) => {
+    if(item) {
+      articlePlaceholderEn.innerText = item;
+    } else {
+      articlePlaceholderEn.innerHTML = '&#8212;';
+    }
+  }
 };
 
 // Function which shows or hides elements. Used in displaying articles/translations
@@ -35,168 +63,92 @@ function switchElementVisibility(elementToShow, elementToHide) {
   elementToHide.classList.add('u-display-none');
 };
 
-// Manages article visibility using the above function
+// Manages article and translation visibility using the above function
 const visibility = {
-  enShowArticle: () => {
+  showArticle: () => {
     switchElementVisibility(articlePlaceholderEn, articleOverlayEn);
   },
-  enHideArticle: () => {
+  hideArticle: () => {
     switchElementVisibility(articleOverlayEn, articlePlaceholderEn);
   },
-  enShowTranslation: () => {
+  showTranslation: () => {
     switchElementVisibility(translationListEn, enTranslationOverlay);
   },
-  enHideTranslation: () => {
+  hideTranslation: () => {
     switchElementVisibility(enTranslationOverlay, translationListEn);
   },
-  roShowArticle: () => {
-    switchElementVisibility(articlePlaceholderRo, articleOverlayRo);
-  },
-  roHideArticle: () => {
-    switchElementVisibility(articleOverlayRo, articlePlaceholderRo);
-  },
-  roShowTranslation: () => {
-    switchElementVisibility(translationListRo, roTranslationOverlay);
-  },
-  roHideTranslation: () => {
-    switchElementVisibility(roTranslationOverlay, translationListRo);
-  }
 };
 
 // Function used in creating and appending translations
+const dom = {
+  createElement: (element) => {
+    const createdElement = document.createElement(element);
+    return createdElement;
+  },
+  appendElement: (element, placeToAppend) => {
+    placeToAppend.append(element);
+  },
+};
+
+// This combines both of the above and is used specifically for creating and appending translations
+function createAndAppendLi(translation) {
+  const newItem = dom.createElement("li");
+  newItem.innerText = translation;
+  dom.appendElement(newItem, translationListEn);
+}
+
 function createElementAndAppend(word, whereToAppend) {
   const li = document.createElement('li');
   li.innerText = word;
   whereToAppend.append(li);
 };
 
-// Replace game inner text
-const replaceInnerText = {
-  article: (wordObj, gameArticle, lang) => {
-    // Checks if show article is checked
-    if(checkSetting(showArticle)) {
-      // Showing article and hiding the overlay based on lang chosen
-      if(lang === "en") {
-        visibility.enShowArticle();
-      } else {
-        visibility.roShowArticle();
-      }
-      // Checking to see if data coming is not empty string
-      if(wordObj.indefinite_article) {
-        gameArticle.innerText = wordObj.indefinite_article;
-        return;
-      // If data coming is an empty string
-      } else {
-        gameArticle.innerHTML = '&#8212;';
-        return;
-      };
-    };
-
-    // Checks if show article is checked
-    if(!checkSetting(wordObj, gameArticle)) {
-      // Hiding article and showing overlay
-      if(lang === "en") {
-        visibility.enHideArticle();
-      } else {
-        visibility.roHideArticle();
-      }
-      // Checking to see if data coming is not empty string
-      if(wordObj.indefinite_article) {
-        gameArticle.innerText = wordObj.indefinite_article;
-        return;
-      // If data coming is an empty string
-      } else {
-        gameArticle.innerHTML = '&#8212;';
-        return;
-      };
-    };
-  },
-  enTranslation: (wordObj) => {
-    // Emptying / Reseting the 'playing field'
-    translationListEn.innerHTML = '';
-
-    // Checks if show english translation is checked
-    if(checkSetting(showEnTranslation)) {
-      // Showing translation and hiding the overlay
-      visibility.enShowTranslation();
-      // Checking to see if data coming is an array
-      if(Array.isArray(wordObj.en_translation)) {
-        wordObj.en_translation.forEach((translation) => {
-          this.createElementAndAppend(translation, translationListEn);
-          return;
-        });
-      // If data coming is not an array
-      } else {
-        this.createElementAndAppend(wordObj.en_translation, translationListEn);
-        return;
-      };
-    };
-
-    // Checks if show english translation is checked
-    if(!checkSetting(showEnTranslation)) {
-      // Hiding translation and showing the overlay
-      visibility.enHideTranslation();
-      // Checking to see if data coming is an array
-      if(Array.isArray(wordObj.en_translation)) {
-        wordObj.en_translation.forEach((translation) => {
-          this.createElementAndAppend(translation, translationListEn);
-          return;
-        });
-      // If data coming is not an array
-      } else {
-        this.createElementAndAppend(wordObj.en_translation, translationListEn);
-        return;
-      };
-    };
-  },
-  roTranslation: (wordObj) => {
-    // Emptying / Reseting the 'playing field'
-    translationListRo.innerHTML = '';
-
-    // Checks if show english translation is checked
-    if(checkSetting(showRoTranslation)) {
-      // Showing translation and hiding the overlay
-      visibility.roShowTranslation();
-      // Checking to see if data coming is an array
-      if(Array.isArray(wordObj.ro_translation)) {
-        wordObj.ro_translation.forEach((translation) => {
-          this.createElementAndAppend(translation, translationListRo);
-          return;
-        });
-      // If data coming is not an array
-      } else {
-        this.createElementAndAppend(wordObj.ro_translation, translationListRo);
-        return;
-      };
-    };
-
-    // Checks if show english translation is checked
-    if(!checkSetting(showRoTranslation)) {
-      // Hiding translation and showing the overlay
-      visibility.roHideTranslation();
-      // Checking to see if data coming is an array
-      if(Array.isArray(wordObj.ro_translation)) {
-        wordObj.ro_translation.forEach((translation) => {
-          this.createElementAndAppend(translation, translationListRo);
-          return;
-        });
-      // If data coming is not an array
-      } else {
-        this.createElementAndAppend(wordObj.ro_translation, translationListRo);
-        return;
-      };
-    };
-  },
-  enWord: (wordObj) => {
-    gameWordEn.innerText = wordObj.word;
-  },
-  roWord: (wordObj) => {
-    gameWordRo.innerText = wordObj.word;
-  }
+function appendElement(element, whereToAppend) {
+  whereToAppend.append(element);
 }
 
-// Get random word
-async function getWord(lang) {
+// Replace game inner text
+const replaceInnerText = {
+  article: (wordObj) => {
+    check.ifArticleExistsReplace(wordObj.indefinite_article);
+    if(check.setting(showArticle)) {
+      visibility.showArticle();
+    } else {
+      visibility.hideArticle();
+    }
+  },
+  translation: (wordObj) => {
+    translationListEn.innerHTML = '';
+    if(check.setting(showEnTranslation) || check.setting(showRoTranslation)) {
+      visibility.showTranslation();
+      if(check.setting(showEnTranslation)) {
+        check.ifArrayAndAppend(wordObj.en_translation);
+        return;
+      } else {
+        check.ifArrayAndAppend(wordObj.ro_translation);
+        return;
+      };
+    } else {
+      visibility.hideTranslation();
+      check.ifArrayAndAppend(wordObj.en_translation);
+      return;
+    };
+  },
+  word: (wordObj) => {
+    gameWordEn.innerText = wordObj.word;
+  }
+};
+
+// Replaces inner text in the box
+function getWord() {  
+  const randomWordObj = apiData[Math.floor(Math.random() * apiData.length - 1)];
+  replaceInnerText.article(randomWordObj);
+  replaceInnerText.translation(randomWordObj);
+  replaceInnerText.word(randomWordObj);
+}
+
+// Fetch data then store in a variable
+async function fetchData() {
   await fetch(api, {
     method: 'GET',
     headers: {
@@ -204,21 +156,7 @@ async function getWord(lang) {
     }
   })
     .then(res => res.json())
-    .then((res) => {
-      const random = Math.floor(Math.random() * res.length);
-      const randomWordObj = res[random];
-      if(lang === 'en') {
-        replaceInnerText.article(randomWordObj, articlePlaceholderEn, "en");
-        replaceInnerText.enWord(randomWordObj);
-        replaceInnerText.enTranslation(randomWordObj);
-      } else if(lang === 'ro') {
-        replaceInnerText.article(randomWordObj, articlePlaceholderRo, "ro");
-        replaceInnerText.roWord(randomWordObj);
-        replaceInnerText.roTranslation(randomWordObj);
-      } else {
-        console.log('something went wrong')
-      };
-    });
+    .then(res => apiData = res);
 };
 
 // Console.log the data coming from api

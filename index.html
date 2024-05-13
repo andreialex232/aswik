@@ -49,6 +49,7 @@
             <label>
               <input 
                 id="checkbox-en"
+                onclick="check.enChecked()"
                 type="checkbox"/>
               <span class="checkbox"></span>
             </label>
@@ -62,6 +63,7 @@
             <label>
               <input 
                 id="checkbox-ro"
+                onclick="check.roChecked()"
                 type="checkbox"/>
               <span class="checkbox"></span>
             </label>
@@ -73,8 +75,8 @@
   <!-- Word generator - eng-->
     <div class="button-wrapper">
       <button
-        onclick="getWord('en')"
-        class="button generate-button">Get random word
+        onclick="fetchData()"
+        class="button generate-button">FetchData
       </button>
     </div>
 
@@ -88,7 +90,7 @@
           Word
         </div>
         <div class="game__translation-1">
-          English Translation
+          Translation
         </div>
       </div>
       <div class="game__container-2">
@@ -101,7 +103,7 @@
               Hidden
             </div>
             <button 
-              onclick="visibility.enShowArticle()"
+              onclick="visibility.showArticle()"
               class="button">
               Click to Show
             </button>
@@ -121,7 +123,7 @@
               Hidden
             </div>
             <button 
-              onclick="visibility.enShowTranslation()"
+              onclick="visibility.showTranslation()"
               class="button">
               Click to Show
             </button>
@@ -133,7 +135,7 @@
     <!-- Word generator - ro -->
     <div class="button-wrapper">
       <button 
-        onclick="getWord('ro')"
+        onclick="getWord()"
         class="button generate-button">Get random word</button>
     </div>
 
