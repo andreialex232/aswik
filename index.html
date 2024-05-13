@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <!-- Header & nav -->
   <header class="header">
     <h1 class="h1">
@@ -19,8 +20,7 @@
     </h1>
     <nav class="nav">
       <a href="index.html">Home</a>
-      <a href="why.html">Why did i create this</a>
-      <a href="how.html">How it works</a>
+      <a href="history.html">History</a>
     </nav>
   </header>
 
@@ -72,9 +72,10 @@
 
 <!-- Word generator - eng-->
   <div class="button-wrapper">
-    <button 
+    <button
       onclick="getWord('en')"
-      class="button generate-button">Get random word</button>
+      class="button generate-button">Get random word
+    </button>
   </div>
 
   <!-- Game box - eng -->
@@ -188,25 +189,21 @@
     </div>
   </section>
 
-  <button onclick="logData()">console.log data</button>
-
-<div style="display: flex; flex-direction: column;">
-  <div style="display: flex; gap: 2rem;">
-    <div>I. Art</div>
-    <div>Word</div>
-    <div>Translation</div>
-  </div>
-  <div style="display: flex; gap: 2rem;">
-    <div id="iArt">Ett</div>
-
-    <div id="html-word">Word
-      <ul class="word-list" id="word-list">
-        
-      </ul>
+  <!-- History -->
+  <!-- <section class="history">
+    <h2 class="history__h2">Session history</h2>
+    <div class="history__headers">
+      <div>Article</div>
+      <div>Word</div>
+      <div>Translation</div>
     </div>
-    <div id="en-trsl">TRANSLATED</div>
-  </div>
-</div>
+    <ul class="history__list">
+      <li class="history__list__item">
+        
+      </li>
+    </ul>
+  </section> -->
+  <!-- <button onclick="logData()">console.log data</button> -->
 
 <!-- Inputs used to post data to database -->
 <!-- <div style="display: flex; flex-direction: column; margin-top: 20px; margin-bottom: 20px;">
@@ -228,32 +225,6 @@
   </div>
 </div>
   <button onclick="postData()">post data to db</button> -->
-
-<!-- Show english translation checkbox -->
-<div style="display: flex; align-items: center;">
-  <p>Show English Translation</p>
-  <label
-  class="switch">
-  <input
-    onclick="checkBooleann()"
-    id="en-trans-checkbox"
-    type="checkbox">
-  <span class="slider round"></span>
-</label>
-<!-- Show romanian translation checkbox -->
-<!-- <div style="display: flex; align-items: center;">
-  <p>Show Romanian Translation</p>
-  <label
-  class="switch">
-  <input 
-    onclick="enCheckbox()" 
-    id="ro"
-    type="checkbox">
-  <span class="slider round"></span>
-</label>
-</div> -->
-
-
 
   <script src="index.js"></script>
 </body>

@@ -73,7 +73,8 @@
 
 .game__container-1,
 .game__container-2,
-.game__container-3 {
+.game__container-3,
+.history__headers {
   display: grid;
   grid-template-columns: repeat(3, 400px);
   align-items: center;
@@ -82,7 +83,8 @@
   border-left: .1px solid #fff;
 }
 
-.game__container-1 {
+.game__container-1,
+.history__headers {
   border-top: .1px solid #fff;
   padding-bottom: 1rem;
   padding-top: 1rem;
@@ -149,4 +151,28 @@
 
 .informative-text {
   margin-bottom: .2rem;
+}
+
+/* Session history */
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12rem;
+}
+
+.history__h2 {
+  padding-bottom: 1rem;
+}
+
+.history__headers {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  align-items: center;
+  justify-items: center;
+}
+
+.history__list {
+  list-style: none;
 }
