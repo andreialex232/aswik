@@ -78,9 +78,6 @@
   grid-template-columns: repeat(3, 400px);
   align-items: center;
   justify-items: center;
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
-  font-style: normal;
   border-right: .1px solid #fff;
   border-left: .1px solid #fff;
 }
@@ -89,6 +86,9 @@
   border-top: .1px solid #fff;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
 .game__container-2,
