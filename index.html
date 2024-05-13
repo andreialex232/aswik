@@ -76,7 +76,11 @@
     <div class="button-wrapper">
       <button
         onclick="fetchData()"
-        class="button generate-button">FetchData
+        class="button fetch-button">Load words
+      </button>
+      <button
+        onclick="getWord()"
+        class="button generate-button">Get random word
       </button>
     </div>
 
@@ -132,65 +136,6 @@
       </div>
     </section>
 
-    <!-- Word generator - ro -->
-    <div class="button-wrapper">
-      <button 
-        onclick="getWord()"
-        class="button generate-button">Get random word</button>
-    </div>
-
-    <!-- Game box - ro -->
-    <section class="game">
-      <div class="game__container-1">
-        <div class="game__article-1">
-          Indefinite Article
-        </div>
-        <div class="game__word-1">
-          Word
-        </div>
-        <div class="game__translation-1">
-          Romanian Translation
-        </div>
-      </div>
-      <div class="game__container-3">
-        <div class="game__article-3">
-          <div class="game__article-3__placeholder">
-            &#8212;
-          </div>
-          <div class="hidden-article-3 u-display-none">
-            <div class="informative-text">
-              Hidden
-            </div>
-            <button 
-              onclick="visibility.roShowArticle()"
-              class="button">
-              Click to Show
-            </button>
-          </div>
-        </div>
-        <div class="game__word-3">
-          &#8212;
-        </div>
-        <div class="game__translation-3">
-          <ul class="list-3">
-            <li class="list-3__item">
-              &#8212;
-            </li>
-          </ul>
-          <div class="hidden-translation-3 u-display-none">
-            <div class="informative-text">
-              Hidden
-            </div>
-            <button 
-              onclick="visibility.roShowTranslation()"
-              class="button">
-              Click to Show
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
   <!-- History -->
   <div class="bg-2">
     <section class="history">

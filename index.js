@@ -10,23 +10,54 @@ const showArticle = document.getElementById('checkbox-article');
 const showEnTranslation = document.getElementById('checkbox-en');
 const showRoTranslation = document.getElementById('checkbox-ro');
 
-// Variables used in both english game and used to hide and show articles & translations
+// Variables used in both displaying text and to hide and show articles & translations
 const articlePlaceholderEn = document.querySelector('.game__article-2__placeholder')
 const translationListEn = document.querySelector('.list-2');
 const enTranslationOverlay = document.querySelector('.hidden-translation-2');
 const articleOverlayEn = document.querySelector('.hidden-article-2');
-
-// Variables used in both romanian game and used to hide and show articles & tranlations
-const articlePlaceholderRo = document.querySelector('.game__article-3__placeholder');
-const translationListRo = document.querySelector('.list-3');
-const roTranslationOverlay = document.querySelector('.hidden-translation-3');
-const articleOverlayRo = document.querySelector('.hidden-article-3');
-
-// Word for ro box
-const gameWordRo = document.querySelector('.game__word-3');
-
-// Word for en box
 const gameWordEn = document.querySelector('.game__word-2');
+
+// Buttons
+const generateBtn = document.querySelector('.generate-button');
+const fetchBtn = document.querySelector('.fetch-button');
+
+// Function which shows or hides elements. Used in displaying articles/translations
+function switchElementVisibility(elementToShow, elementToHide) {
+  elementToShow.classList.remove('u-display-none');
+  elementToHide.classList.add('u-display-none');
+};
+
+// Manages article and translation visibility using the above function
+const visibility = {
+  showArticle: () => {
+    switchElementVisibility(articlePlaceholderEn, articleOverlayEn);
+  },
+  hideArticle: () => {
+    switchElementVisibility(articleOverlayEn, articlePlaceholderEn);
+  },
+  showTranslation: () => {
+    switchElementVisibility(translationListEn, enTranslationOverlay);
+  },
+  hideTranslation: () => {
+    switchElementVisibility(enTranslationOverlay, translationListEn);
+  },
+  showGetWordBtn: () => {
+    switchElementVisibility(generateBtn, fetchBtn);
+  },
+  hideGetWordBtn: () => {
+    switchElementVisibility(fetchBtn, generateBtn);
+  }
+};
+
+// Checks session storage for data stored, if we dont have data then we show a button to load data
+const checkForStoredData = (function() {
+  if(JSON.parse(sessionStorage.getItem("fetchedData"))) {
+    apiData = JSON.parse(sessionStorage.getItem("fetchedData"));
+    visibility.showGetWordBtn();
+  } else {
+    visibility.hideGetWordBtn();
+  }
+})();
 
 // Functions which check for something grouped into an object
 const check = {
@@ -54,32 +85,15 @@ const check = {
     } else {
       articlePlaceholderEn.innerHTML = '&#8212;';
     }
+  },
+  ifDataLoaded: () => {
+    if(apiData) {
+      visibility.showGetWordBtn();
+    }
   }
 };
 
-// Function which shows or hides elements. Used in displaying articles/translations
-function switchElementVisibility(elementToShow, elementToHide) {
-  elementToShow.classList.remove('u-display-none');
-  elementToHide.classList.add('u-display-none');
-};
-
-// Manages article and translation visibility using the above function
-const visibility = {
-  showArticle: () => {
-    switchElementVisibility(articlePlaceholderEn, articleOverlayEn);
-  },
-  hideArticle: () => {
-    switchElementVisibility(articleOverlayEn, articlePlaceholderEn);
-  },
-  showTranslation: () => {
-    switchElementVisibility(translationListEn, enTranslationOverlay);
-  },
-  hideTranslation: () => {
-    switchElementVisibility(enTranslationOverlay, translationListEn);
-  },
-};
-
-// Function used in creating and appending translations
+// Functions used in creating and appending translations
 const dom = {
   createElement: (element) => {
     const createdElement = document.createElement(element);
@@ -90,24 +104,14 @@ const dom = {
   },
 };
 
-// This combines both of the above and is used specifically for creating and appending translations
+// This combines both of the above into 1
 function createAndAppendLi(translation) {
   const newItem = dom.createElement("li");
   newItem.innerText = translation;
   dom.appendElement(newItem, translationListEn);
 }
 
-function createElementAndAppend(word, whereToAppend) {
-  const li = document.createElement('li');
-  li.innerText = word;
-  whereToAppend.append(li);
-};
-
-function appendElement(element, whereToAppend) {
-  whereToAppend.append(element);
-}
-
-// Replace game inner text
+// Replaces inner text
 const replaceInnerText = {
   article: (wordObj) => {
     check.ifArticleExistsReplace(wordObj.indefinite_article);
@@ -139,9 +143,9 @@ const replaceInnerText = {
   }
 };
 
-// Replaces inner text in the box
+// Function used to replace all texts at once, binded on get random word button
 function getWord() {  
-  const randomWordObj = apiData[Math.floor(Math.random() * apiData.length - 1)];
+  const randomWordObj = apiData[Math.floor(Math.random() * apiData.length)];
   replaceInnerText.article(randomWordObj);
   replaceInnerText.translation(randomWordObj);
   replaceInnerText.word(randomWordObj);
@@ -156,7 +160,11 @@ async function fetchData() {
     }
   })
     .then(res => res.json())
-    .then(res => apiData = res);
+    .then(res => {
+      apiData = res;
+      sessionStorage.setItem("fetchedData", JSON.stringify(apiData));
+      check.ifDataLoaded();
+    })
 };
 
 // Console.log the data coming from api
