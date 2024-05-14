@@ -2,8 +2,10 @@
 const api = "http://127.0.0.1:3000/all";
 let apiData;
 
-// Time variable
+// Variables for session history
 const date = new Date();
+const sessionHistoryItems = [];
+const historyDate = document.querySelector('.history-date');
 
 // Settings variables
 const showArticle = document.getElementById('checkbox-article');
@@ -59,6 +61,20 @@ const checkForStoredData = (function() {
   }
 })();
 
+// Session history
+const historySesh = {
+  createObj: (value1, value2, value3)  => {
+    const obj = new Object;
+    obj.article = value1;
+    obj.word = value2,
+    obj.translation = value3;
+    return obj;
+  },
+  pushToArray: (obj) => {
+    sessionHistoryItems.push(obj);
+  }
+};
+
 // Functions which check for something grouped into an object
 const check = {
   setting: (setting) => {
@@ -70,22 +86,7 @@ const check = {
   roChecked: () => {
     showEnTranslation.checked = false;
   },
-  ifArrayAndAppend: (item) => {
-    if(Array.isArray(item)) {
-      item.forEach((translation) => {
-        createAndAppendLi(translation);
-      })
-    } else {
-      createAndAppendLi(item);
-    };
-  },
-  ifArticleExistsReplace: (item) => {
-    if(item) {
-      articlePlaceholderEn.innerText = item;
-    } else {
-      articlePlaceholderEn.innerHTML = '&#8212;';
-    }
-  },
+  // Checks if we have data stored apiData
   ifDataLoaded: () => {
     if(apiData) {
       visibility.showGetWordBtn();
@@ -102,56 +103,81 @@ const dom = {
   appendElement: (element, placeToAppend) => {
     placeToAppend.append(element);
   },
+  createAndAppendLi: (translation) => {
+    const newItem = dom.createElement("li");
+    newItem.innerText = translation;
+    dom.appendElement(newItem, translationListEn)
+   }
 };
 
-// This combines both of the above into 1
-function createAndAppendLi(translation) {
-  const newItem = dom.createElement("li");
-  newItem.innerText = translation;
-  dom.appendElement(newItem, translationListEn);
-}
-
-// Replaces inner text
+// Replaces inner text and the first 3 return the article, the word and the translation (ro or en) respectively
 const replaceInnerText = {
   article: (wordObj) => {
-    check.ifArticleExistsReplace(wordObj.indefinite_article);
     if(check.setting(showArticle)) {
       visibility.showArticle();
     } else {
       visibility.hideArticle();
     }
+    return replaceInnerText.replaceArticle(wordObj.indefinite_article);
   },
   translation: (wordObj) => {
     translationListEn.innerHTML = '';
     if(check.setting(showEnTranslation) || check.setting(showRoTranslation)) {
       visibility.showTranslation();
       if(check.setting(showEnTranslation)) {
-        check.ifArrayAndAppend(wordObj.en_translation);
-        return;
+        return replaceInnerText.appendTranslation(wordObj.en_translation);
       } else {
-        check.ifArrayAndAppend(wordObj.ro_translation);
-        return;
+        return replaceInnerText.appendTranslation(wordObj.ro_translation);
       };
     } else {
       visibility.hideTranslation();
-      check.ifArrayAndAppend(wordObj.en_translation);
-      return;
+      return replaceInnerText.appendTranslation(wordObj.en_translation);
     };
   },
   word: (wordObj) => {
     gameWordEn.innerText = wordObj.word;
+    return gameWordEn.innerText;
+  },
+
+  // These are used above
+  appendTranslation: (item) => {
+    const translationArray = [];
+    if(Array.isArray(item)) {
+      item.forEach((translation) => {
+        dom.createAndAppendLi(translation);
+        translationArray.push(translation);
+      })
+      return translationArray;
+    } else {
+      dom.createAndAppendLi(item);
+      return item;
+    };
+    
+  },
+  replaceArticle: (item) => {
+    if(item) {
+      articlePlaceholderEn.innerText = item;
+      return item;
+    } else {
+      articlePlaceholderEn.innerHTML = '&#8212;';
+      return articlePlaceholderEn.innerHTML;
+    };
   }
 };
 
 // Function used to replace all texts at once, binded on get random word button
 function getWord() {  
   const randomWordObj = apiData[Math.floor(Math.random() * apiData.length)];
-  replaceInnerText.article(randomWordObj);
+  /* replaceInnerText.article(randomWordObj);
   replaceInnerText.translation(randomWordObj);
-  replaceInnerText.word(randomWordObj);
+  replaceInnerText.word(randomWordObj); */
+  historySesh.pushToArray(historySesh.createObj(replaceInnerText.article(randomWordObj),
+                                                replaceInnerText.word(randomWordObj),
+                                                replaceInnerText.translation(randomWordObj)));
+  console.log(sessionHistoryItems);
 }
 
-// Fetch data then store in a variable
+// Fetch data then store it in a variable
 async function fetchData() {
   await fetch(api, {
     method: 'GET',
