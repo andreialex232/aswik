@@ -20,7 +20,7 @@
       </h1>
       <nav class="nav">
         <a href="index.html">Home</a>
-        <a href="history.html">History</a>
+        <a href="#history">History</a>
       </nav>
     </header>
 
@@ -71,7 +71,6 @@
         </div>
       </div>
     </section>
-
   <!-- Word generator - eng-->
     <div class="button-wrapper">
       <button
@@ -135,9 +134,11 @@
         </div>
       </div>
     </section>
-
+  </div>
   <!-- History -->
-  <div class="bg-2">
+  <div 
+    id="history"
+    class="bg-2">
     <section class="history">
       <h2 class="history__h2">Session history</h2>
       <div class="history__date">
@@ -150,20 +151,21 @@
       </div>
       <div class="history__content">
         <ul class="history__content__list">
-          <li class="history__content__list__items">
-            <div class="history__content-art">
-              &#8212;
-            </div>
-            <div class="history__content-word">
-              &#8212;
-            </div>
-            <div class="history__content-translation">
-              &#8212;
-            </div>
-          </li>
+          <li class="history__content__list__items"></li>
         </ul>
       </div>
     </section>
+
+    <article 
+      class="reason"
+      id="reason">
+      <h2 class="reason__heading">The reason for creating this</h2>
+      <section>
+        The main reason for building this small app was to combine learning swedish and programming and it proved quite a good and fun idea.
+        By creating this the way i did i learned some basic back-end stuff, MongoDB, how it all connects to each other and i was able to deepen my knowledge of programming.
+        So now i have a little storage just for myself which contains all the words i learned so far from different sources and an easy way of practicing them.
+      </section>
+    </article>
   </div>  
   
   <!-- <button onclick="logData()">console.log data</button> -->

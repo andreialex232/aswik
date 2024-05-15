@@ -22,6 +22,10 @@ nav a:hover {
   color: #bbbbbb;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   box-sizing: border-box;
   color: #fff;

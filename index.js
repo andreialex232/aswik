@@ -3,9 +3,10 @@ const api = "http://127.0.0.1:3000/all";
 let apiData;
 
 // Variables for session history
-const date = new Date();
 const sessionHistoryItems = [];
-const historyDate = document.querySelector('.history-date');
+const historyDate = document.querySelector('.history__date');
+const historyList = document.querySelector('.history__content__list');
+const historyPlaceholder = document.querySelector('.placeholder-history');
 
 // Settings variables
 const showArticle = document.getElementById('checkbox-article');
@@ -23,31 +24,29 @@ const gameWordEn = document.querySelector('.game__word-2');
 const generateBtn = document.querySelector('.generate-button');
 const fetchBtn = document.querySelector('.fetch-button');
 
-// Function which shows or hides elements. Used in displaying articles/translations
-function switchElementVisibility(elementToShow, elementToHide) {
-  elementToShow.classList.remove('u-display-none');
-  elementToHide.classList.add('u-display-none');
-};
-
-// Manages article and translation visibility using the above function
+// Manages article and translation visibility using the bottom method
 const visibility = {
   showArticle: () => {
-    switchElementVisibility(articlePlaceholderEn, articleOverlayEn);
+    visibility.switchElementVisibility(articlePlaceholderEn, articleOverlayEn);
   },
   hideArticle: () => {
-    switchElementVisibility(articleOverlayEn, articlePlaceholderEn);
+    visibility.switchElementVisibility(articleOverlayEn, articlePlaceholderEn);
   },
   showTranslation: () => {
-    switchElementVisibility(translationListEn, enTranslationOverlay);
+    visibility.switchElementVisibility(translationListEn, enTranslationOverlay);
   },
   hideTranslation: () => {
-    switchElementVisibility(enTranslationOverlay, translationListEn);
+    visibility.switchElementVisibility(enTranslationOverlay, translationListEn);
   },
   showGetWordBtn: () => {
-    switchElementVisibility(generateBtn, fetchBtn);
+    visibility.switchElementVisibility(generateBtn, fetchBtn);
   },
   hideGetWordBtn: () => {
-    switchElementVisibility(fetchBtn, generateBtn);
+    visibility.switchElementVisibility(fetchBtn, generateBtn);
+  },
+  switchElementVisibility(elementToShow, elementToHide) {
+    elementToShow.classList.remove('u-display-none');
+    elementToHide.classList.add('u-display-none');
   }
 };
 
@@ -72,7 +71,7 @@ const historySesh = {
   },
   pushToArray: (obj) => {
     sessionHistoryItems.push(obj);
-  }
+  },
 };
 
 // Functions which check for something grouped into an object
@@ -94,7 +93,7 @@ const check = {
   }
 };
 
-// Functions used in creating and appending translations
+// Functions used in creating and appending elements
 const dom = {
   createElement: (element) => {
     const createdElement = document.createElement(element);
@@ -103,11 +102,26 @@ const dom = {
   appendElement: (element, placeToAppend) => {
     placeToAppend.append(element);
   },
-  createAndAppendLi: (translation) => {
+  createAndAppendTranslation: (translation) => {
     const newItem = dom.createElement("li");
     newItem.innerText = translation;
     dom.appendElement(newItem, translationListEn)
-   }
+  },
+  createAndAppendHistory: () => {
+    const newLi = dom.createElement("li");
+    newLi.classList.add("history__content__list__items")
+    const lastItem = sessionHistoryItems[sessionHistoryItems.length -1];
+    dom.appendElement(newLi, historyList);
+    for (const [key, value] of Object.entries(lastItem)) {
+      const newDiv = dom.createElement("div");
+      if(Array.isArray(value)) {
+        newDiv.innerText = value.join(", ");
+      } else {
+        newDiv.innerText = value;
+      };
+      dom.appendElement(newDiv, newLi);
+    };
+  },
 };
 
 // Replaces inner text and the first 3 return the article, the word and the translation (ro or en) respectively
@@ -144,12 +158,12 @@ const replaceInnerText = {
     const translationArray = [];
     if(Array.isArray(item)) {
       item.forEach((translation) => {
-        dom.createAndAppendLi(translation);
+        dom.createAndAppendTranslation(translation);
         translationArray.push(translation);
       })
       return translationArray;
     } else {
-      dom.createAndAppendLi(item);
+      dom.createAndAppendTranslation(item);
       return item;
     };
     
@@ -162,6 +176,10 @@ const replaceInnerText = {
       articlePlaceholderEn.innerHTML = '&#8212;';
       return articlePlaceholderEn.innerHTML;
     };
+  },
+  time: () => {
+    const date = new Date();
+    historyDate.innerText = `Created on: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
   }
 };
 
@@ -175,7 +193,9 @@ function getWord() {
                                                 replaceInnerText.word(randomWordObj),
                                                 replaceInnerText.translation(randomWordObj)));
   console.log(sessionHistoryItems);
-}
+  replaceInnerText.time();
+  dom.createAndAppendHistory();
+};
 
 // Fetch data then store it in a variable
 async function fetchData() {
