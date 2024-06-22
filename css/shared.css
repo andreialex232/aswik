@@ -40,6 +40,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 608px) {
+    flex-direction: column;
+  }
 }
 
 .h1 {
@@ -50,10 +54,19 @@ body {
   color: transparent;
   background-image: linear-gradient(to right, #649deb, #b3b8cc, #dcccbf);
   animation: movingGradient 8s linear infinite;
+
+  @media screen and (max-width: 608px) {
+    padding-left: 0;
+  }
 }
 
 .nav {
   display: flex;
   gap:3rem;
   padding-right: 2.5rem;
+  visibility: hidden;
+
+  @media screen and (min-width: 608px) {
+    visibility: initial;
+  }
 }

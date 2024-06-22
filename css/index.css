@@ -10,6 +10,10 @@
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg clip-path='url(%26quot%3b%23SvgjsClipPath1348%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient1349%26quot%3b)'%3e%3c/rect%3e%3ccircle r='61.385' cx='1610.65' cy='808.93' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3ccircle r='78.665' cx='8.32' cy='101.55' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3ccircle r='102.27' cx='557.65' cy='21.82' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3ccircle r='57.745' cx='1180.24' cy='349.52' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3ccircle r='47.53' cx='822.97' cy='89.75' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3ccircle r='43.53' cx='186.43' cy='181.55' fill='rgba(16%2c 15%2c 22%2c 1)'%3e%3c/circle%3e%3c/g%3e%3cdefs%3e%3cclipPath id='SvgjsClipPath1348'%3e%3crect width='1920' height='1080' x='0' y='0'%3e%3c/rect%3e%3c/clipPath%3e%3clinearGradient x1='10.94%25' y1='-19.44%25' x2='89.06%25' y2='119.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1349'%3e%3cstop stop-color='rgba(15%2c 14%2c 21%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(7%2c 5%2c 8%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");;
   background-size: cover;
   background-repeat: no-repeat;
+
+  @media screen and (max-width: 608px){
+    display: none;
+  }
 }
 
 /* Checkbox */
@@ -48,6 +52,11 @@
 .settings {
   margin-top: 3rem;
   text-align: center;
+
+  @media screen and (max-width: 608px) {
+    display: none;
+    margin-top: -15rem;
+  }
 }
 
 .settings__heading,
@@ -84,18 +93,49 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 608px){
+    position: relative;
+  }
 }
 
 .game__container-1,
 .game__container-2,
-.game__container-3,
 .history__headers {
   display: grid;
-  grid-template-columns: repeat(3, 400px);
   align-items: center;
   justify-items: center;
-  border-right: .1px solid #fff;
-  border-left: .1px solid #fff;
+  
+  @media screen and (min-width: 609px) {
+    border-right: .1px solid #fff;
+    border-left: .1px solid #fff;
+    grid-template-columns: repeat(3, 200px);
+  }
+  @media screen and (min-width: 800px) {
+    grid-template-columns: repeat(3, 250px);
+  }
+  @media screen and (min-width: 1095px) {
+    grid-template-columns: repeat(3, 320px);
+  }
+  @media screen and (min-width: 1233px){
+    grid-template-columns: repeat(3, 400px);
+  }
+}
+
+.game__container-1 {
+  @media screen  and (max-width: 608px) {
+    position:absolute;
+    top: 0;
+    gap: 5rem;
+  }
+}
+
+.game__container-2 {
+  @media screen  and (max-width: 608px) {
+    position:absolute;
+    top: 70px;
+    gap: 5.5rem;
+  }
 }
 
 .game__container-1,
@@ -106,12 +146,19 @@
   font-family: "Poppins", sans-serif;
   font-weight: 200;
   font-style: normal;
+
+  @media screen and (max-width:608px) {
+    border-top: none;
+  }
 }
 
-.game__container-2,
-.game__container-3 {
+.game__container-2 {
   border-bottom: .1px solid #fff;
   padding-bottom: 1rem;
+
+  @media screen and (max-width: 608px) {
+    border-bottom: none;
+  }
 }
 
 .game__article-1,
@@ -123,7 +170,6 @@
 
 /* The used for translations */
 .list-2,
-.list-3,
 .history__content__list {
   list-style: none;
   text-align: center;
@@ -175,7 +221,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 610px;
+  padding-bottom: 5rem;
+  padding-top: 3rem;
 }
 
 .history__h2 {
