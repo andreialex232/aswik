@@ -24,6 +24,14 @@ const gameWordEn = document.querySelector('.game__word-2');
 const generateBtn = document.querySelector('.generate-button');
 const fetchBtn = document.querySelector('.fetch-button');
 
+// Checks screen width on page load and checks settings' checkboxes
+document.addEventListener("DOMContentLoaded", () => {
+  if(window.innerWidth <= 608 || screen.width <= 608) {
+    showEnTranslation.checked = true;
+    showArticle.checked = true;
+  };
+});
+
 // Manages article and translation visibility using the bottom method
 const visibility = {
   showArticle: () => {
