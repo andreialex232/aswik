@@ -213,9 +213,7 @@
 
 /* Classes used to display HTML in index.js */
 .hidden-article-2,
-.hidden-article-3,
-.hidden-translation-2,
-.hidden-translation-3 {
+.hidden-translation-2 {
   text-align: center;
   margin-bottom: .3rem;
 }
