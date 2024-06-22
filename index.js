@@ -24,13 +24,61 @@ const gameWordEn = document.querySelector('.game__word-2');
 const generateBtn = document.querySelector('.generate-button');
 const fetchBtn = document.querySelector('.fetch-button');
 
-// Checks screen width on page load and checks settings' checkboxes
-document.addEventListener("DOMContentLoaded", () => {
+// Checks for window resize (mostly desktops)
+function widthLowerThanTarget() {
+  visibility.showArticle();
+  visibility.showTranslation();
+};
+
+function debounce(func, wait) {
+  let timeout;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(func, wait);
+  };
+};
+
+// Functions which check for something grouped into an object
+const check = {
+  setting: (setting) => {
+    return setting.checked? true: false;
+  },
+  enChecked: () => {
+    showRoTranslation.checked = false;
+  },
+  roChecked: () => {
+    showEnTranslation.checked = false;
+  },
+  // Checks if we have data stored apiData
+  ifDataLoaded: () => {
+    if(apiData) {
+      visibility.showGetWordBtn();
+    }
+  },
+  // Checks for device width (mostly desktops) and checks checkboxes when width lower than 608px
+  deviceWidth: () => {
+    if(window.innerWidth <= 608 || screen.width <= 608) {
+      showEnTranslation.checked = true;
+      showArticle.checked = true;
+    };
+  },
+  width: () => {
+    const targetWidth = 608;
+    if(window.innerWidth <= targetWidth) {
+      widthLowerThanTarget();
+    };
+  }
+};
+
+const debouncedCheckWidth = debounce(check.width, 200);
+window.addEventListener('resize', debouncedCheckWidth);
+
+/* document.addEventListener("DOMContentLoaded", () => {
   if(window.innerWidth <= 608 || screen.width <= 608) {
     showEnTranslation.checked = true;
     showArticle.checked = true;
   };
-});
+}); */
 
 // Manages article and translation visibility using the bottom method
 const visibility = {
@@ -80,25 +128,6 @@ const historySesh = {
   pushToArray: (obj) => {
     sessionHistoryItems.push(obj);
   },
-};
-
-// Functions which check for something grouped into an object
-const check = {
-  setting: (setting) => {
-    return setting.checked? true: false;
-  },
-  enChecked: () => {
-    showRoTranslation.checked = false;
-  },
-  roChecked: () => {
-    showEnTranslation.checked = false;
-  },
-  // Checks if we have data stored apiData
-  ifDataLoaded: () => {
-    if(apiData) {
-      visibility.showGetWordBtn();
-    }
-  }
 };
 
 // Functions used in creating and appending elements
@@ -197,6 +226,7 @@ function getWord() {
   /* replaceInnerText.article(randomWordObj);
   replaceInnerText.translation(randomWordObj);
   replaceInnerText.word(randomWordObj); */
+  check.deviceWidth();
   historySesh.pushToArray(historySesh.createObj(replaceInnerText.article(randomWordObj),
                                                 replaceInnerText.word(randomWordObj),
                                                 replaceInnerText.translation(randomWordObj)));
