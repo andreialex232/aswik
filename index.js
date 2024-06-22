@@ -30,6 +30,7 @@ function widthLowerThanTarget() {
   visibility.showTranslation();
 };
 
+// Debounce
 function debounce(func, wait) {
   let timeout;
   return function() {
@@ -62,6 +63,7 @@ const check = {
       showArticle.checked = true;
     };
   },
+  // Checks for target width
   width: () => {
     const targetWidth = 608;
     if(window.innerWidth <= targetWidth) {
@@ -70,9 +72,12 @@ const check = {
   }
 };
 
+// Triggers on window resize every 200 milliseconds
 const debouncedCheckWidth = debounce(check.width, 200);
 window.addEventListener('resize', debouncedCheckWidth);
 
+
+// Checks for window or screen width on load
 /* document.addEventListener("DOMContentLoaded", () => {
   if(window.innerWidth <= 608 || screen.width <= 608) {
     showEnTranslation.checked = true;
@@ -223,9 +228,6 @@ const replaceInnerText = {
 // Function used to replace all texts at once, binded on get random word button
 function getWord() {  
   const randomWordObj = apiData[Math.floor(Math.random() * apiData.length)];
-  /* replaceInnerText.article(randomWordObj);
-  replaceInnerText.translation(randomWordObj);
-  replaceInnerText.word(randomWordObj); */
   check.deviceWidth();
   historySesh.pushToArray(historySesh.createObj(replaceInnerText.article(randomWordObj),
                                                 replaceInnerText.word(randomWordObj),
