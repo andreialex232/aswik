@@ -277,7 +277,7 @@ async function postData() {
   const ro_translation = await document.getElementById('ro-trans').value?.toLowerCase();
   const en_translation = await document.getElementById('en-trans').value?.toLowerCase();
 
-  const res = await fetch(api, {
+  const res = await fetch(fetchURL, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

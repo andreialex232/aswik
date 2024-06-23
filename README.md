@@ -48,5 +48,3 @@ npm i
 
 Start app.js using nodemon using start from NPM Scripts.
 Start the live server by right clicking in index.html > Open with Live Server or clicking on Go Live in bottom right corner.
-
-**Make sure you use 127.0.0.1:5500 instead of localhost:5500**
