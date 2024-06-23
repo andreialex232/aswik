@@ -1,6 +1,6 @@
 <div align="center">
   <h1 align="center">ASWIK</h1>
-  <h2>Learning tool for practicing swedish words and sayings</h2>
+  <h2>Learning Tool For Practicing Swedish Words and Sayings</h2>
 </div>
 
 ## Features
@@ -15,13 +15,15 @@ Soon
 ## Tech Used
 
 - JavaScript - Language.
-- CSS .
+- CSS.
 - [MongoDB](https://www.mongodb.com/) - Database.
 - [NodeJS](https://nodejs.org/en) - Backend Server.
 
 ## Getting it to work on your machine
 
-**Right now it requires me to know your ip address in order to access the database**
+### IMPORTANT
+
+**RIGHT NOW IT REQUIRES ME TO KNOW YOUR IP ADDRESS IN ORDER TO ACCESS THE DATABASE**
 
 ### What you need installed
 
