@@ -10,7 +10,7 @@
 
 ## Demo 
 
-Soon
+![ASWIK Demo](./media/videos/ASWIK-demo.gif)
 
 ## Tech Used
 
