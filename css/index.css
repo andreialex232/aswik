@@ -277,3 +277,12 @@
     grid-template-columns: repeat(3, 400px);
   }
 }
+
+/* Footer */
+.footer {
+  border-top: .1px solid #fff;
+  justify-content: center;
+  gap: 3rem;
+  display: flex;
+  padding: 2rem 0;
+}

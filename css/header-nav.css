@@ -14,16 +14,19 @@ a {
   text-decoration: none;
 }
 
-nav a:link {
+nav a:link,
+footer a:link {
   color: #fff;
 }
 
 
-nav a:visited {
+nav a:visited,
+footer a:visited {
   color: inherit;
 }
 
-nav a:hover {
+nav a:hover,
+footer a:hover {
   color: #bbbbbb;
 }
 
