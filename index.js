@@ -273,7 +273,7 @@ function commaRemover(inputValue) {
 
 async function postData() {
   const word = await document.getElementById('word').value?.trim().toLowerCase();
-  const article = await document.getElementById('article').value?.trim().toLowerCase();
+  const indefinite_article = await document.getElementById('article').value?.trim().toLowerCase();
   const ro_translation = await document.getElementById('ro-trans').value?.toLowerCase();
   const en_translation = await document.getElementById('en-trans').value?.toLowerCase();
 
@@ -283,7 +283,7 @@ async function postData() {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({word,
-                          article, 
+                          indefinite_article,
                           ro_translation: commaRemover(ro_translation),
                           en_translation: commaRemover(en_translation)
     })
@@ -291,7 +291,7 @@ async function postData() {
 
   const data = await res.json();
   if(data.acknowledged) {
-    console.log('Successfully added:', article, word, '|', 'Ro:', ro_translation, '|', 'En:', en_translation);
+    console.log('Successfully added:', indefinite_article, word, '|', 'Ro:', ro_translation, '|', 'En:', en_translation);
   } else {
     console.error('Could not add:', word);
   }
