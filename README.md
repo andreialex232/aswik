@@ -21,10 +21,6 @@
 
 ## Getting it to work on your machine
 
-### IMPORTANT
-
-**RIGHT NOW IT REQUIRES ME TO KNOW YOUR IP ADDRESS IN ORDER TO ACCESS THE DATABASE**
-
 ### What you need installed
 
 - [MongoDB](https://www.mongodb.com/).
